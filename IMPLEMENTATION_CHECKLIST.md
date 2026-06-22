@@ -1,0 +1,18 @@
+# Implementation Checklist
+
+- [x] Types created (`src/types`)
+- [x] DynamoDB client created (`src/lib/dynamodb.ts`)
+- [x] Donation service created (`src/lib/services/donation-service.ts`)
+- [x] Claim service created (`src/lib/services/claim-service.ts`)
+- [x] User service created (`src/lib/services/user-service.ts`)
+- [x] Donation API routes created (`src/app/api/donations`)
+- [x] Claims API routes created (`src/app/api/claims/route.ts`)
+- [x] Dashboard API route created (`src/app/api/dashboard/route.ts`)
+- [x] Landing page exists (src/app/page.tsx — not modified)
+- [x] Dashboard page created (`src/app/dashboard/page.tsx`)
+- [x] Donations page created (`src/app/donations/page.tsx`)
+- [x] Create donation page created (`src/app/donations/new/page.tsx`)
+- [x] Donation details page created (`src/app/donations/[id]/page.tsx`)
+- [x] Profile page created (`src/app/profile/page.tsx`)
+- [x] NextAuth setup file created (`src/lib/auth.ts`)
+- [x] Documentation created (`PROJECT_STRUCTURE.md`)
