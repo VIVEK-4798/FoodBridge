@@ -1,5 +1,4 @@
 # Implementation Checklist
-All done
 - [x] Types created (`src/types`)
 - [x] DynamoDB client created (`src/lib/dynamodb.ts`)
 - [x] Donation service created (`src/lib/services/donation-service.ts`)
