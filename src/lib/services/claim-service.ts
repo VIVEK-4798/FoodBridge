@@ -11,13 +11,24 @@ export async function createClaim(claim: Claim): Promise<Claim> {
     await client.send(new PutItemCommand(putParams));
 
     // Update donation status to CLAIMED
-    const updateParams = {
-      TableName: DONATIONS_TABLE,
-      Key: marshall({ donationId: claim.donationId }),
-      UpdateExpression: 'SET #s = :status',
-      ExpressionAttributeNames: { '#s': 'status' },
-      ExpressionAttributeValues: marshall({ ':status': 'CLAIMED' }),
-    };
+   const updateParams = {
+  TableName: DONATIONS_TABLE,
+  Key: marshall({
+    donationId: claim.donationId,
+  }),
+
+  UpdateExpression: "SET #s = :status",
+
+  ExpressionAttributeNames: {
+    "#s": "status",
+  },
+
+  ExpressionAttributeValues: {
+    ":status": {
+      S: "CLAIMED",
+    },
+  },
+};
     await client.send(new UpdateItemCommand(updateParams));
 
     return claim;
