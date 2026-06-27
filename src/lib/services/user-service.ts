@@ -1,4 +1,4 @@
-import { client, USERS_TABLE, PutItemCommand, GetItemCommand, UpdateItemCommand, marshall, unmarshall } from '../dynamodb';
+import { client, USERS_TABLE, PutItemCommand, GetItemCommand, ScanCommand, UpdateItemCommand, marshall, unmarshall } from '../dynamodb';
 import { User } from '../../types/user';
 
 export async function createUser(user: User): Promise<User> {
@@ -22,6 +22,22 @@ export async function getUserById(id: string): Promise<User | null> {
   }
 }
 
+export async function getUserByEmail(email: string): Promise<User | null> {
+  try {
+    const params = {
+      TableName: USERS_TABLE,
+      FilterExpression: '#email = :email',
+      ExpressionAttributeNames: { '#email': 'email' },
+      ExpressionAttributeValues: marshall({ ':email': email }),
+    };
+    const res = await client.send(new ScanCommand(params));
+    const item = res.Items?.[0];
+    return item ? (unmarshall(item) as User) : null;
+  } catch (err) {
+    throw new Error(`Failed to get user by email: ${(err as Error).message}`);
+  }
+}
+
 export async function updateUserRole(id: string, role: User['role']): Promise<void> {
   try {
     const params = {
@@ -34,5 +50,16 @@ export async function updateUserRole(id: string, role: User['role']): Promise<vo
     await client.send(new UpdateItemCommand(params));
   } catch (err) {
     throw new Error(`Failed to update user role: ${(err as Error).message}`);
+  }
+}
+
+export async function getAllUsers(): Promise<User[]> {
+  try {
+    const params = { TableName: USERS_TABLE };
+    const res = await client.send(new ScanCommand(params));
+    const items = res.Items || [];
+    return items.map((it) => unmarshall(it) as User);
+  } catch (err) {
+    throw new Error(`Failed to fetch users: ${(err as Error).message}`);
   }
 }

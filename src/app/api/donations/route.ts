@@ -2,10 +2,25 @@ import { NextResponse } from 'next/server';
 import { getAllDonations, createDonation } from '../../../lib/services/donation-service';
 import { Donation } from '../../../types/donation';
 
+import { getUserById } from '../../../lib/services/user-service';
+
 export async function GET() {
   try {
     const donations = await getAllDonations();
-    return NextResponse.json(donations);
+    const resolved = await Promise.all(
+      donations.map(async (d) => {
+        try {
+          const restaurant = await getUserById(d.restaurantId);
+          return {
+            ...d,
+            restaurantName: restaurant ? restaurant.name : 'Partner Restaurant',
+          };
+        } catch {
+          return { ...d, restaurantName: 'Partner Restaurant' };
+        }
+      })
+    );
+    return NextResponse.json(resolved);
   } catch (err) {
     return NextResponse.json({ error: (err as Error).message }, { status: 500 });
   }
