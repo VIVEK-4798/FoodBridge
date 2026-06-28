@@ -54,15 +54,15 @@ export default function Toast({ message, type = 'success', onClose, duration = 3
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-55 max-w-sm w-full animate-slide-in">
-      <div className={`p-4 rounded-2xl border shadow-xl flex items-start gap-3 backdrop-blur-md ${getStyles()}`}>
+    <div className="fixed bottom-6 right-6 z-55 max-w-sm w-full animate-slide-in">
+      <div className={`p-4 rounded-2xl border shadow-xl flex items-center gap-3.5 backdrop-blur-md ${getStyles()}`}>
         {getIcon()}
-        <div className="flex-1 text-sm font-semibold leading-snug">
+        <div className="flex-1 text-sm font-bold tracking-tight">
           {message}
         </div>
         <button
           onClick={onClose}
-          className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 shrink-0"
+          className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 shrink-0 transition"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
