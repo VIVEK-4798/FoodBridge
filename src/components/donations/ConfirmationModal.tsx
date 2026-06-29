@@ -23,26 +23,26 @@ export default function ConfirmationModal({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-[#1A1F2B]/50 backdrop-blur-sm transition-opacity"
         onClick={loading ? undefined : onCancel}
       ></div>
 
       <div className="flex min-h-full items-center justify-center p-4 text-center">
-        <div className="relative transform overflow-hidden rounded-2xl bg-white dark:bg-gray-900 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-gray-100 dark:border-gray-800">
-          <div className="p-6">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+        <div className="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-gray-100">
+          <div className="p-8">
+            <h3 className="text-xl font-black text-[#1A1F2B] tracking-tight mb-2">
               {title}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-gray-500 font-medium leading-relaxed">
               {message}
             </p>
           </div>
-          <div className="bg-gray-50 dark:bg-gray-850 px-6 py-4 flex flex-row-reverse gap-3 border-t border-gray-100 dark:border-gray-800">
+          <div className="bg-[#F8F9FC] px-8 py-5 flex flex-col sm:flex-row-reverse gap-3 border-t border-gray-100">
             <button
               type="button"
               disabled={loading}
               onClick={onConfirm}
-              className="inline-flex w-full sm:w-auto justify-center rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition disabled:opacity-50"
+              className="inline-flex w-full sm:w-auto justify-center rounded-2xl bg-[#F5A623] px-6 py-2.5 text-sm font-extrabold text-white hover:bg-[#e0961a] shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -60,7 +60,7 @@ export default function ConfirmationModal({
               type="button"
               disabled={loading}
               onClick={onCancel}
-              className="inline-flex w-full sm:w-auto justify-center rounded-xl bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-750 transition"
+              className="inline-flex w-full sm:w-auto justify-center rounded-2xl bg-white border border-gray-200 px-6 py-2.5 text-sm font-extrabold text-[#1A1F2B] hover:bg-gray-50 hover:shadow-sm transition-all duration-200"
             >
               Cancel
             </button>

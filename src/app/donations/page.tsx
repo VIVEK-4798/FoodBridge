@@ -13,6 +13,7 @@ import EmptyState from '../../components/ui/EmptyState';
 import PageContainer from '../../components/ui/PageContainer';
 import SectionHeader from '../../components/ui/SectionHeader';
 import { Donation } from '../../types/donation';
+import { Plus } from 'lucide-react';
 
 export default function DonationsPage() {
   const { data: session, status } = useSession();
@@ -61,7 +62,7 @@ export default function DonationsPage() {
 
   if (status === 'loading' || status === 'unauthenticated' || !session?.user?.role) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#F8F9FC] flex flex-col justify-between">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <LoadingSpinner />
@@ -134,17 +135,15 @@ export default function DonationsPage() {
   const headerAction = role === 'restaurant' ? (
     <a
       href="/donations/new"
-      className="inline-flex items-center justify-center px-4 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-xl shadow-sm transition"
+      className="inline-flex items-center justify-center px-6 py-3 text-sm font-extrabold text-white bg-[#F5A623] hover:bg-[#e0961a] rounded-2xl shadow-md hover:shadow-lg transition-all duration-200"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-4 h-4 mr-2">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-      </svg>
+      <Plus className="w-4 h-4 mr-2" />
       Create Donation
     </a>
   ) : undefined;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F8F9FC] text-[#1A1F2B] flex flex-col justify-between">
       <Header />
       
       <PageContainer>
@@ -159,16 +158,16 @@ export default function DonationsPage() {
         />
 
         {error && (
-          <div className="p-4 text-sm text-red-750 bg-red-50 dark:bg-red-950/20 dark:text-red-400 border border-red-200 dark:border-red-900/50 rounded-xl flex items-center justify-between">
-            <span>{error}</span>
-            <button onClick={fetchDonations} className="text-xs font-bold underline hover:no-underline">
+          <div className="p-4 text-sm text-red-600 bg-red-50 border border-red-100 rounded-2xl flex items-center justify-between shadow-sm">
+            <span className="font-medium">{error}</span>
+            <button onClick={fetchDonations} className="text-xs font-extrabold text-[#F5A623] underline hover:no-underline">
               Retry
             </button>
           </div>
         )}
 
         {!error && !loading && (
-          <div className="space-y-4">
+          <div className="space-y-5">
             <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
             {role === 'ngo' && (
@@ -185,9 +184,11 @@ export default function DonationsPage() {
         )}
 
         {loading ? (
-          <LoadingSpinner />
+          <div className="py-12">
+            <LoadingSpinner />
+          </div>
         ) : processedDonations.length === 0 ? (
-          <div className="py-6">
+          <div className="py-8">
             {searchQuery || availability !== 'all' || minQuantity > 0 ? (
               <EmptyState
                 title="No search results"

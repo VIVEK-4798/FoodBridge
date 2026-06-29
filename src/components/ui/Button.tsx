@@ -16,21 +16,21 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyle =
-    'inline-flex items-center justify-center font-bold text-sm rounded-2xl px-5 py-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 active:scale-98 disabled:opacity-50 disabled:pointer-events-none select-none h-12 min-w-[100px]';
+    'inline-flex items-center justify-center font-extrabold text-sm rounded-2xl px-6 py-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F5A623] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none select-none h-12 min-w-[100px]';
 
   const getVariantStyles = () => {
     switch (variant) {
       case 'secondary':
-        return 'bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-150/40 dark:bg-teal-950/20 dark:hover:bg-teal-950/45 dark:text-teal-400 dark:border-teal-900/50';
+        return 'bg-[#FFF4E6] hover:bg-[#FDEBD0] text-[#F5A623] border border-[#F5A623]/20 shadow-sm hover:shadow-md';
       case 'danger':
-        return 'bg-red-500 hover:bg-red-600 text-white shadow-xs';
+        return 'bg-red-600 hover:bg-red-700 text-white shadow-sm hover:shadow-md';
       case 'outline':
-        return 'bg-transparent border-2 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-850';
+        return 'bg-transparent border-2 border-gray-200 text-[#1A1F2B] hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow-md';
       case 'ghost':
-        return 'bg-transparent text-gray-650 hover:text-emerald-650 hover:bg-emerald-50/40 dark:text-gray-350 dark:hover:text-emerald-400 dark:hover:bg-emerald-950/15';
+        return 'bg-transparent text-gray-500 hover:text-[#F5A623] hover:bg-[#FFF4E6]';
       case 'primary':
       default:
-        return 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm hover:shadow-md';
+        return 'bg-[#F5A623] hover:bg-[#e0961a] text-white shadow-md hover:shadow-lg';
     }
   };
 

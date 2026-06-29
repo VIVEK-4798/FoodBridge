@@ -10,8 +10,10 @@ import LoadingSpinner from '../../../components/ui/LoadingSpinner';
 import EmptyState from '../../../components/ui/EmptyState';
 import PageContainer from '../../../components/ui/PageContainer';
 import SectionHeader from '../../../components/ui/SectionHeader';
+import Card from '../../../components/ui/Card';
 import { Claim } from '../../../types/claim';
 import { Donation } from '../../../types/donation';
+import { ClipboardCheck } from 'lucide-react';
 
 export default function MyClaimsPage() {
   const { data: session, status } = useSession();
@@ -67,7 +69,7 @@ export default function MyClaimsPage() {
 
   if (status === 'loading' || status === 'unauthenticated' || session?.user?.role !== 'ngo') {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#F8F9FC] flex flex-col justify-between">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <LoadingSpinner />
@@ -78,7 +80,7 @@ export default function MyClaimsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F8F9FC] text-[#1A1F2B] flex flex-col justify-between">
       <Header />
       
       <PageContainer className="max-w-5xl">
@@ -87,10 +89,30 @@ export default function MyClaimsPage() {
           description="Track and coordinate pickups for food donations you have claimed."
         />
 
+        {/* Summary Metric Card */}
+        {!loading && !error && claims.length > 0 && (
+          <Card className="p-6 bg-white rounded-2xl border border-gray-100 shadow-md mb-8">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-[#FFF4E6] rounded-2xl text-[#F5A623] shadow-sm">
+                  <ClipboardCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs font-extrabold text-gray-400 uppercase tracking-wider">Total Active Claims</p>
+                  <p className="text-3xl font-black text-[#F5A623]">{claims.length}</p>
+                </div>
+              </div>
+              <span className="text-xs font-bold text-gray-400 bg-[#F8F9FC] px-3 py-1 rounded-full border border-gray-100">
+                Active NGO Partner
+              </span>
+            </div>
+          </Card>
+        )}
+
         {error && (
-          <div className="p-4 text-sm text-red-755 bg-red-50 dark:bg-red-955/20 dark:text-red-400 border border-red-200 dark:border-red-900/50 rounded-xl flex items-center justify-between">
+          <div className="p-4 text-sm font-medium text-red-600 bg-red-50 border border-red-100 rounded-2xl flex items-center justify-between shadow-sm mb-6">
             <span>{error}</span>
-            <button onClick={fetchData} className="text-xs font-bold underline hover:no-underline">
+            <button onClick={fetchData} className="text-xs font-extrabold text-[#F5A623] underline hover:no-underline">
               Retry
             </button>
           </div>
@@ -99,12 +121,14 @@ export default function MyClaimsPage() {
         {loading ? (
           <LoadingSpinner />
         ) : claims.length === 0 ? (
-          <EmptyState
-            title="No claims yet"
-            description="You haven't claimed any surplus food donations. Browse the listings to claim safe, delicious food for your organization."
-            actionLabel="Browse Available Donations"
-            actionHref="/donations"
-          />
+          <div className="bg-white p-12 rounded-2xl border border-gray-100 shadow-md">
+            <EmptyState
+              title="No claims yet"
+              description="You haven't claimed any surplus food donations. Browse the listings to claim safe, delicious food for your organization."
+              actionLabel="Browse Available Donations"
+              actionHref="/donations"
+            />
+          </div>
         ) : (
           <div className="space-y-4">
             {claims.map((claim) => (

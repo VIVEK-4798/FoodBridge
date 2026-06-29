@@ -15,6 +15,7 @@ import SearchBar from '../../components/donations/SearchBar';
 import EmptyState from '../../components/ui/EmptyState';
 import PageContainer from '../../components/ui/PageContainer';
 import Card from '../../components/ui/Card';
+import { LayoutDashboard, ShoppingBag, ClipboardCheck, CheckCircle2 } from 'lucide-react';
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -89,7 +90,7 @@ export default function DashboardPage() {
 
   if (status === 'loading' || status === 'unauthenticated' || !session?.user?.role) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#F8F9FC] flex flex-col justify-between">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <SkeletonCard variant="stat" count={4} />
@@ -103,40 +104,40 @@ export default function DashboardPage() {
   const name = session.user.name || 'User';
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F8F9FC] text-[#1A1F2B] flex flex-col justify-between">
       <Header />
       
       <PageContainer>
-        {/* Welcome Section */}
-        <Card className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6">
+        {/* Welcome Section - Clean White Card */}
+        <Card className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
           <div className="space-y-1">
-            <h1 className="text-2xl font-black text-gray-900 dark:text-white leading-tight">
-              {getGreeting()}, <span className="text-blue-650 dark:text-blue-400">{name}</span>
+            <h1 className="text-3xl font-black text-[#1A1F2B] leading-tight">
+              {getGreeting()}, <span className="text-[#F5A623]">{name}</span>
             </h1>
-            <p className="text-xs text-gray-400 dark:text-gray-500 font-extrabold uppercase tracking-widest leading-none mt-1 inline-block">
+            <p className="text-xs font-extrabold text-gray-400 uppercase tracking-widest leading-none mt-1.5 inline-block bg-[#FFF4E6] px-3 py-1 rounded-full text-[#F5A623] border border-[#F5A623]/20">
               Role: {role === 'restaurant' ? 'Restaurant Provider' : 'NGO Recipient'}
             </p>
           </div>
-          <div className="text-left sm:text-right shrink-0">
-            <span className="text-sm font-semibold text-gray-500 dark:text-gray-400">
+          <div className="text-left sm:text-right shrink-0 bg-[#F8F9FC] p-3 rounded-2xl border border-gray-100">
+            <span className="text-sm font-semibold text-[#1A1F2B] block">
               {getFormattedDate()}
             </span>
-            <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase mt-0.5 tracking-wider">
-              FoodBridge Operations Center
+            <p className="text-[10px] font-bold text-gray-400 uppercase mt-1 tracking-wider">
+              Operations Center
             </p>
           </div>
         </Card>
 
         {error && (
-          <div className="p-4 text-sm text-red-750 bg-red-50 dark:bg-red-955/20 dark:text-red-400 border border-red-200 dark:border-red-900/50 rounded-xl flex items-center justify-between">
-            <span>Error: {error}</span>
-            <button onClick={fetchDashboardData} className="text-xs font-bold underline hover:no-underline">
+          <div className="p-4 text-sm text-red-600 bg-red-50 border border-red-100 rounded-2xl flex items-center justify-between shadow-sm">
+            <span className="font-medium">Error: {error}</span>
+            <button onClick={fetchDashboardData} className="text-xs font-extrabold bg-white px-4 py-2 rounded-xl shadow-sm hover:shadow transition">
               Refresh Dashboard
             </button>
           </div>
         )}
 
-        {/* Dashboard Search */}
+        {/* Dashboard Search - Rounded and Clean */}
         {!error && !loading && (
           <div className="w-full">
             <SearchBar
@@ -153,11 +154,11 @@ export default function DashboardPage() {
             <SkeletonCard variant="stat" count={4} />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-4">
-                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 animate-pulse"></div>
+                <div className="h-6 bg-gray-200 rounded w-1/4 animate-pulse"></div>
                 <SkeletonCard variant="list" count={3} />
               </div>
               <div className="space-y-4">
-                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
+                <div className="h-6 bg-gray-200 rounded w-1/3 animate-pulse"></div>
                 <SkeletonCard variant="timeline" count={4} />
               </div>
             </div>
@@ -167,72 +168,57 @@ export default function DashboardPage() {
         {/* Live Content */}
         {!loading && !error && data && (
           <>
-            {/* Primary Statistics Row */}
+            {/* Primary Statistics Row - Colored Top Borders */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <AnalyticsCard
                 title="Total Donations"
                 value={data.stats.totalDonations}
                 description="Overall food listings posted"
-                icon={
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5-6h7.5m-7.5 3h7.5m-7.5 3h7.5m-.008 5.25h-.007v.008H18v-.008Zm-2.25 0h-.008v.008h.008v-.008Zm-2.25 0h-.007v.008h.007v-.008Zm-.007-2.25h-.008v.008h.008v-.008Zm-.007-2.25H9.75v.008H9.75v-.008Zm-2.25 0H7.5v.008h.008v-.008Zm-.008-2.25h-.007v.008h.007v-.008Zm-.007-2.25H5.25v.008h.008v-.008Z" />
-                  </svg>
-                }
+                icon={<LayoutDashboard className="w-5 h-5" />}
+                className="border-t-4 border-t-[#F5A623]"
               />
               <AnalyticsCard
                 title="Available Donations"
                 value={data.stats.availableDonations}
                 description="Listings open to claim"
-                className="border-l-4 border-l-emerald-500"
-                icon={
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                }
+                className="border-t-4 border-t-[#F5A623]"
+                icon={<ShoppingBag className="w-5 h-5" />}
               />
               <AnalyticsCard
                 title="Claimed Pickups"
                 value={data.stats.claimedDonations}
                 description="Currently claimed by NGOs"
-                className="border-l-4 border-l-amber-500"
-                icon={
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                  </svg>
-                }
+                className="border-t-4 border-t-[#F5A623]"
+                icon={<ClipboardCheck className="w-5 h-5" />}
               />
               <AnalyticsCard
                 title="Completed Cycles"
                 value={data.stats.completedDonations}
                 description="Successfully delivered donations"
-                className="border-l-4 border-l-gray-400"
-                icon={
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                }
+                className="border-t-4 border-t-[#F5A623]"
+                icon={<CheckCircle2 className="w-5 h-5" />}
               />
             </div>
 
             {/* Platform Summary Row */}
-            <Card className="p-5">
-              <h3 className="text-xs font-bold text-gray-400 dark:text-gray-550 uppercase tracking-widest mb-4">Platform Summary</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <Card className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <h3 className="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-5">Platform Summary</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div className="space-y-1">
-                  <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">{data.stats.totalMeals}</p>
-                  <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Meals Shared</p>
+                  <p className="text-4xl font-black text-[#1A1F2B] tracking-tight">{data.stats.totalMeals}</p>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wide">Meals Shared</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">{data.stats.totalNgos}</p>
-                  <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Partner NGOs</p>
+                  <p className="text-4xl font-black text-[#1A1F2B] tracking-tight">{data.stats.totalNgos}</p>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wide">Partner NGOs</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">{data.stats.totalRestaurants}</p>
-                  <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Active Restaurants</p>
+                  <p className="text-4xl font-black text-[#1A1F2B] tracking-tight">{data.stats.totalRestaurants}</p>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wide">Active Restaurants</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">{data.stats.totalClaims}</p>
-                  <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Claims Made</p>
+                  <p className="text-4xl font-black text-[#1A1F2B] tracking-tight">{data.stats.totalClaims}</p>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wide">Claims Made</p>
                 </div>
               </div>
             </Card>
@@ -243,14 +229,14 @@ export default function DashboardPage() {
               <div className="lg:col-span-2 space-y-6">
                 
                 {/* Latest Listings */}
-                <Card className="p-5 space-y-4">
+                <Card className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 space-y-5">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-base font-extrabold text-gray-900 dark:text-white">
+                    <h3 className="text-xl font-extrabold text-[#1A1F2B]">
                       Recent Surplus Postings
                     </h3>
                     <a
                       href="/donations"
-                      className="text-xs font-bold text-blue-600 dark:text-blue-450 hover:underline"
+                      className="text-xs font-extrabold text-[#F5A623] hover:underline bg-[#FFF4E6] px-4 py-2 rounded-xl transition-colors"
                     >
                       View All Listings
                     </a>
@@ -266,7 +252,7 @@ export default function DashboardPage() {
                       }
                     />
                   ) : (
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {filteredLatestDonations.map((donation: any) => (
                         <RecentDonationCard key={donation.donationId} donation={donation} />
                       ))}
@@ -275,11 +261,11 @@ export default function DashboardPage() {
                 </Card>
 
                 {/* Timeline Events */}
-                <Card className="p-5 space-y-4">
-                  <h3 className="text-base font-extrabold text-gray-900 dark:text-white">
+                <Card className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 space-y-5">
+                  <h3 className="text-xl font-extrabold text-[#1A1F2B]">
                     Operations Feed
                   </h3>
-                  <div className="pt-2">
+                  <div className="pt-1">
                     <ActivityTimeline events={data.recentActivity} />
                   </div>
                 </Card>
@@ -290,16 +276,16 @@ export default function DashboardPage() {
               <div className="space-y-6">
                 
                 {/* Status Progress Summary */}
-                <Card className="p-5 space-y-4">
-                  <h3 className="text-base font-extrabold text-gray-900 dark:text-white">
+                <Card className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 space-y-5">
+                  <h3 className="text-xl font-extrabold text-[#1A1F2B]">
                     Donations Allocation
                   </h3>
                   <StatusOverview stats={data.stats} />
                 </Card>
 
                 {/* Quick Actions */}
-                <Card className="p-5 space-y-4">
-                  <h3 className="text-base font-extrabold text-gray-900 dark:text-white">
+                <Card className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 space-y-5">
+                  <h3 className="text-xl font-extrabold text-[#1A1F2B]">
                     Operations Controls
                   </h3>
                   <QuickActionCard role={role} />

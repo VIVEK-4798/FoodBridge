@@ -29,54 +29,54 @@ export default function DonationCard({ donation, userRole, ngoId, onClaimSuccess
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-gray-150/70 dark:border-gray-800/80 rounded-3xl p-6 shadow-xs hover:shadow-md hover:-translate-y-1 transition duration-300 flex flex-col justify-between h-full group">
+    <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full group">
       <div className="space-y-4">
         {/* Top line: status and quantity */}
         <div className="flex items-center justify-between">
           <StatusBadge status={donation.status} />
-          <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-emerald-50 text-emerald-750 dark:bg-emerald-950/20 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30">
+          <span className="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-[#FFF4E6] text-[#F5A623] border border-[#F5A623]/20 shadow-sm">
             {donation.quantity} meals
           </span>
         </div>
 
         {/* Food name and restaurant */}
         <div>
-          <h3 className="text-lg font-black text-gray-900 dark:text-white line-clamp-1 tracking-tight group-hover:text-emerald-600 transition">
+          <h3 className="text-xl font-black text-[#1A1F2B] line-clamp-1 tracking-tight group-hover:text-[#F5A623] transition-colors duration-200">
             {donation.foodName}
           </h3>
-          <p className="text-xs font-bold text-gray-450 dark:text-gray-500 mt-0.5">
+          <p className="text-xs font-medium text-gray-500 mt-1">
             by {donation.restaurantName || 'Partner Restaurant'}
           </p>
         </div>
 
         {/* Description */}
         {donation.description && (
-          <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed">
+          <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed font-medium">
             {donation.description}
           </p>
         )}
 
         {/* Details list */}
-        <div className="space-y-2 pt-1.5 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-100/50 dark:border-gray-800/60">
+        <div className="space-y-2.5 pt-2 text-xs text-gray-500 border-t border-gray-100">
           {/* Pickup Address */}
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-2.5">
             <MapPin className="w-4 h-4 shrink-0 text-gray-400 mt-0.5" />
-            <span className="line-clamp-1 font-semibold">{donation.pickupAddress}</span>
+            <span className="line-clamp-1 font-medium text-gray-600">{donation.pickupAddress}</span>
           </div>
 
           {/* Available Until */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <Clock className="w-4 h-4 shrink-0 text-gray-400" />
-            <span className="font-semibold">Available: <strong className="text-gray-700 dark:text-gray-300 font-bold">{formattedExpiry()}</strong></span>
+            <span className="font-medium text-gray-600">Available: <strong className="text-[#1A1F2B] font-extrabold">{formattedExpiry()}</strong></span>
           </div>
         </div>
       </div>
 
       {/* Actions */}
-      <div className="mt-6 pt-4 border-t border-gray-100/60 dark:border-gray-800/60 flex items-center justify-between gap-3">
+      <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
         <a
           href={`/donations/${donation.donationId}`}
-          className="text-xs font-bold text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-450 underline transition decoration-2"
+          className="text-xs font-extrabold px-4 py-2 bg-white hover:bg-[#FFF4E6] text-gray-600 hover:text-[#F5A623] rounded-2xl border border-gray-200 hover:border-[#F5A623] shadow-sm hover:shadow-md transition-all duration-200"
         >
           View Details
         </a>
@@ -86,7 +86,7 @@ export default function DonationCard({ donation, userRole, ngoId, onClaimSuccess
             donationId={donation.donationId}
             ngoId={ngoId}
             onClaimSuccess={onClaimSuccess}
-            buttonClassName="h-9 px-3.5 text-xs rounded-xl shadow-2xs font-bold"
+            buttonClassName="h-9 px-4 text-xs rounded-2xl shadow-md font-extrabold bg-[#F5A623] hover:bg-[#e0961a] text-white border-none"
           />
         )}
       </div>

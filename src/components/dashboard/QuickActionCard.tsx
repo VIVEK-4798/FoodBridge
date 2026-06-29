@@ -73,27 +73,27 @@ export default function QuickActionCard({ role }: QuickActionProps) {
         <a
           key={action.title}
           href={action.href}
-          className={`flex items-start gap-4 p-4.5 rounded-2xl border transition duration-300 group hover:-translate-y-0.5 hover:shadow-xs ${
+          className={`flex items-start gap-4 p-5 rounded-2xl border transition-all duration-300 group hover:-translate-y-0.5 ${
             action.primary
-              ? 'bg-emerald-600 border-emerald-600 text-white hover:bg-emerald-500'
-              : 'bg-white dark:bg-slate-900 border-gray-150/70 dark:border-gray-800/80 text-gray-900 dark:text-white hover:border-emerald-600 dark:hover:border-emerald-500'
+              ? 'bg-[#F5A623] border-[#F5A623] text-white shadow-md hover:shadow-lg'
+              : 'bg-white border-gray-100 text-[#1A1F2B] shadow-sm hover:border-[#F5A623] hover:shadow-md'
           }`}
         >
-          <div className={`p-2.5 rounded-xl shrink-0 ${
+          <div className={`p-3 rounded-2xl shrink-0 transition-transform duration-300 ${
             action.primary
-              ? 'bg-white/10 text-white'
-              : 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-450 group-hover:scale-105 transition shadow-2xs'
+              ? 'bg-white/20 text-white group-hover:scale-105'
+              : 'bg-[#FFF4E6] text-[#F5A623] shadow-sm group-hover:scale-105'
           }`}>
             {action.icon}
           </div>
           <div>
-            <h4 className="text-sm font-bold leading-snug tracking-tight">
+            <h4 className="text-sm font-extrabold leading-snug tracking-tight">
               {action.title}
             </h4>
-            <p className={`text-xs mt-0.5 leading-normal ${
+            <p className={`text-xs mt-1 leading-normal font-medium ${
               action.primary
-                ? 'text-emerald-100'
-                : 'text-gray-500 dark:text-gray-450'
+                ? 'text-[#FFF4E6]'
+                : 'text-gray-500'
             }`}>
               {action.description}
             </p>

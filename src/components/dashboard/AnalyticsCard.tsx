@@ -22,34 +22,34 @@ export default function AnalyticsCard({
   className = '',
 }: AnalyticsCardProps) {
   return (
-    <div className={`bg-white dark:bg-slate-900 border border-gray-150/65 dark:border-gray-800/80 rounded-3xl p-6 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex items-start justify-between gap-4 group ${className}`}>
+    <div className={`bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-start justify-between gap-4 group ${className}`}>
       <div className="space-y-3">
-        <span className="text-[11px] font-extrabold uppercase tracking-widest text-gray-400 dark:text-gray-500 pl-0.5">
+        <span className="text-[11px] font-extrabold uppercase tracking-widest text-gray-400 pl-0.5">
           {title}
         </span>
         <div className="flex items-baseline gap-2">
-          <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">
+          <span className="text-3xl sm:text-4xl font-black text-[#1A1F2B] tracking-tight">
             {value}
           </span>
           {trend && (
             <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider ${
               trend.isPositive 
-                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400' 
-                : 'bg-rose-50 text-rose-700 dark:bg-rose-950/20 dark:text-rose-400'
+                ? 'bg-[#FFF4E6] text-[#F5A623] border border-[#F5A623]/20' 
+                : 'bg-rose-50 text-rose-700 border border-rose-200'
             }`}>
               {trend.value}
             </span>
           )}
         </div>
         {description && (
-          <p className="text-xs text-gray-450 dark:text-gray-400 leading-normal pl-0.5">
+          <p className="text-xs text-gray-500 leading-normal pl-0.5">
             {description}
           </p>
         )}
       </div>
 
       {icon && (
-        <div className="p-3 bg-emerald-50 dark:bg-emerald-950/20 rounded-2xl text-emerald-600 dark:text-emerald-450 group-hover:scale-105 transition shrink-0 shadow-2xs">
+        <div className="p-3 bg-[#FFF4E6] rounded-2xl text-[#F5A623] group-hover:scale-105 transition-transform duration-300 shrink-0 shadow-sm border border-[#F5A623]/10">
           {icon}
         </div>
       )}

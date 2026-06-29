@@ -20,12 +20,12 @@ export default function Toast({ message, type = 'success', onClose, duration = 3
   const getStyles = () => {
     switch (type) {
       case 'error':
-        return 'bg-red-50 text-red-800 border-red-200 dark:bg-red-950/90 dark:text-red-300 dark:border-red-900';
+        return 'bg-red-50 text-red-600 border-red-200';
       case 'info':
-        return 'bg-blue-50 text-blue-800 border-blue-200 dark:bg-blue-950/90 dark:text-blue-300 dark:border-blue-900';
+        return 'bg-blue-50 text-blue-600 border-blue-200';
       case 'success':
       default:
-        return 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/90 dark:text-emerald-300 dark:border-emerald-900';
+        return 'bg-[#FFF4E6] text-[#F5A623] border-[#F5A623]/20';
     }
   };
 
@@ -46,7 +46,7 @@ export default function Toast({ message, type = 'success', onClose, duration = 3
       case 'success':
       default:
         return (
-          <svg className="w-5 h-5 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <svg className="w-5 h-5 text-[#F5A623] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         );
@@ -55,14 +55,14 @@ export default function Toast({ message, type = 'success', onClose, duration = 3
 
   return (
     <div className="fixed bottom-6 right-6 z-55 max-w-sm w-full animate-slide-in">
-      <div className={`p-4 rounded-2xl border shadow-xl flex items-center gap-3.5 backdrop-blur-md ${getStyles()}`}>
+      <div className={`p-4 rounded-2xl border shadow-lg flex items-center gap-4 backdrop-blur-md ${getStyles()}`}>
         {getIcon()}
-        <div className="flex-1 text-sm font-bold tracking-tight">
+        <div className="flex-1 text-sm font-extrabold tracking-tight text-[#1A1F2B]">
           {message}
         </div>
         <button
           onClick={onClose}
-          className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 shrink-0 transition"
+          className="text-gray-400 hover:text-[#1A1F2B] shrink-0 transition-colors duration-200 p-1 hover:bg-gray-100 rounded-xl"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />

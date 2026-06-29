@@ -38,7 +38,7 @@ export default function CreateDonationPage() {
 
   if (status === 'loading' || status === 'unauthenticated' || session?.user?.role !== 'restaurant') {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#F8F9FC] flex flex-col justify-between">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <LoadingSpinner />
@@ -100,7 +100,7 @@ export default function CreateDonationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F8F9FC] text-[#1A1F2B] flex flex-col justify-between">
       <Header />
       
       <PageContainer className="max-w-xl">
@@ -109,10 +109,12 @@ export default function CreateDonationPage() {
           description="Fill out the details below to share your restaurant's surplus food with local shelters."
         />
 
-        <Card className="p-6 md:p-8">
-          <form onSubmit={onSubmit} className="space-y-5">
+        {/* Updated Card styling */}
+        <Card className="p-8 bg-white rounded-2xl border border-gray-100 shadow-md">
+          <form onSubmit={onSubmit} className="space-y-6">
             {error && (
-              <div className="p-3 text-sm text-red-800 bg-red-50 dark:bg-red-950/20 dark:text-red-400 rounded-xl border border-red-200 dark:border-red-900/50">
+              // Updated error message styling
+              <div className="p-4 text-sm font-medium text-red-600 bg-red-50 rounded-2xl border border-red-100">
                 {error}
               </div>
             )}
@@ -168,7 +170,7 @@ export default function CreateDonationPage() {
               <Button
                 type="submit"
                 loading={loading}
-                className="w-full py-3"
+                className="w-full py-3.5 bg-[#F5A623] hover:bg-[#e0961a] text-white rounded-2xl text-sm font-extrabold shadow-md hover:shadow-lg transition-all duration-200 border-none"
               >
                 Submit Donation
               </Button>

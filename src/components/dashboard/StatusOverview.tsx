@@ -23,54 +23,54 @@ export default function StatusOverview({ stats }: StatusOverviewProps) {
       label: 'Available',
       count: stats.availableDonations,
       percent: Math.round((stats.availableDonations / total) * 100),
-      color: 'bg-emerald-500',
-      trackColor: 'bg-emerald-100 dark:bg-emerald-950/20',
-      textColor: 'text-emerald-700 dark:text-emerald-400',
+      color: 'bg-[#F5A623]', // Brand Yellow
+      trackColor: 'bg-gray-100',
+      textColor: 'text-[#F5A623]',
     },
     {
       label: 'Claimed',
       count: stats.claimedDonations,
       percent: Math.round((stats.claimedDonations / total) * 100),
-      color: 'bg-amber-500',
-      trackColor: 'bg-amber-100 dark:bg-amber-950/20',
-      textColor: 'text-amber-700 dark:text-amber-400',
+      color: 'bg-[#F5A623]', // Brand Yellow
+      trackColor: 'bg-gray-100',
+      textColor: 'text-[#F5A623]',
     },
     {
       label: 'Picked Up',
       count: stats.pickedUpDonations,
       percent: Math.round((stats.pickedUpDonations / total) * 100),
-      color: 'bg-blue-500',
-      trackColor: 'bg-blue-100 dark:bg-blue-950/20',
-      textColor: 'text-blue-700 dark:text-blue-400',
+      color: 'bg-[#F5A623]', // Brand Yellow
+      trackColor: 'bg-gray-100',
+      textColor: 'text-[#F5A623]',
     },
     {
       label: 'Completed',
       count: stats.completedDonations,
       percent: Math.round((stats.completedDonations / total) * 100),
-      color: 'bg-gray-400',
-      trackColor: 'bg-gray-200 dark:bg-gray-800',
-      textColor: 'text-gray-500 dark:text-gray-400',
+      color: 'bg-gray-300', // Neutral Gray for Finished Status
+      trackColor: 'bg-gray-100',
+      textColor: 'text-gray-500',
     },
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {items.map((item) => (
         <div key={item.label} className="space-y-1.5">
           <div className="flex items-center justify-between text-sm">
-            <span className="font-extrabold text-gray-700 dark:text-gray-300">
+            <span className="font-extrabold text-gray-400 uppercase tracking-wider text-[11px]">
               {item.label}
             </span>
             <div className="flex items-center gap-2">
-              <span className={`font-bold ${item.textColor}`}>
+              <span className={`font-extrabold text-[#1A1F2B]`}>
                 {item.count}
               </span>
-              <span className="text-xs text-gray-400 dark:text-gray-500 font-semibold">
-                ({item.percent}%)
+              <span className={`text-xs font-extrabold ${item.textColor}`}>
+                {item.percent}%
               </span>
             </div>
           </div>
-          <div className={`h-2.5 w-full rounded-full ${item.trackColor} overflow-hidden`}>
+          <div className={`h-2.5 w-full rounded-full ${item.trackColor} overflow-hidden shadow-inner`}>
             <div
               className={`h-full rounded-full ${item.color} transition-all duration-500`}
               style={{ width: `${item.percent}%` }}

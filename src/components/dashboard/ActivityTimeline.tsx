@@ -20,28 +20,31 @@ interface ActivityTimelineProps {
 
 export default function ActivityTimeline({ events }: ActivityTimelineProps) {
   const getEventIcon = (type: TimelineEvent['type']) => {
+    // Unified Yellow/Amber theme for all timeline icons
+    const iconClass = "flex h-10 w-10 items-center justify-center rounded-2xl bg-[#FFF4E6] text-[#F5A623] border border-[#F5A623]/20 shadow-sm shrink-0";
+    
     switch (type) {
       case 'donation_created':
         return (
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-100/40 dark:border-emerald-900/30 shrink-0">
+          <div className={iconClass}>
             <PlusCircle className="w-5 h-5" />
           </div>
         );
       case 'donation_claimed':
         return (
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 border border-amber-100/40 dark:border-amber-900/30 shrink-0">
+          <div className={iconClass}>
             <UserCheck className="w-5 h-5" />
           </div>
         );
       case 'donation_picked_up':
         return (
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/20 text-blue-600 dark:text-blue-400 border border-blue-100/40 dark:border-blue-900/30 shrink-0">
+          <div className={iconClass}>
             <Truck className="w-5 h-5" />
           </div>
         );
       case 'donation_completed':
         return (
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 shrink-0">
+          <div className={iconClass}>
             <CheckCircle2 className="w-5 h-5" />
           </div>
         );
@@ -66,7 +69,7 @@ export default function ActivityTimeline({ events }: ActivityTimelineProps) {
 
   if (events.length === 0) {
     return (
-      <div className="text-center py-10 text-gray-400 dark:text-gray-500 text-sm font-semibold">
+      <div className="text-center py-10 text-gray-400 text-sm font-extrabold">
         No platform activity recorded yet.
       </div>
     );
@@ -80,22 +83,22 @@ export default function ActivityTimeline({ events }: ActivityTimelineProps) {
             <div className="relative pb-8">
               {eventIdx !== events.length - 1 ? (
                 <span
-                  className="absolute top-5 left-4.5 -ml-px h-full w-0.5 bg-gray-150 dark:bg-gray-850"
+                  className="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200"
                   aria-hidden="true"
                 />
               ) : null}
-              <div className="relative flex items-start space-x-3.5">
+              <div className="relative flex items-start space-x-4">
                 {getEventIcon(event.type)}
                 <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                   <div className="space-y-0.5">
-                    <p className="text-sm font-extrabold text-gray-900 dark:text-white tracking-tight leading-snug">
+                    <p className="text-sm font-extrabold text-[#1A1F2B] tracking-tight leading-snug">
                       {event.title}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                    <p className="text-xs text-gray-500 font-bold">
                       {event.description}
                     </p>
                   </div>
-                  <div className="whitespace-nowrap text-right text-xs text-gray-400 dark:text-gray-500 font-bold shrink-0">
+                  <div className="whitespace-nowrap text-right text-xs text-gray-400 font-extrabold shrink-0 pt-1">
                     <time dateTime={event.timestamp}>{formatTime(event.timestamp)}</time>
                   </div>
                 </div>
